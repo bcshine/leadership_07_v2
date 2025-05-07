@@ -1,6 +1,7 @@
 export const employeeStyles = [
   {
     name: "지시 대기형",
+    emoji: "📋",
     traits: [
       "자발적 행동 없이 주어진 업무만 처리. 스스로 다음 일을 찾지 않고 항상 지시를 기다림. 주체성 부족."
     ],
@@ -15,6 +16,7 @@ export const employeeStyles = [
   },
   {
     name: "불만형",
+    emoji: "😠",
     traits: [
       "근무환경, 동료, 회사 정책 등 다양한 대상에 대해 지속적인 불평을 함. 문제 중심 사고가 강함."
     ],
@@ -28,6 +30,7 @@ export const employeeStyles = [
   },
   {
     name: "무책임형",
+    emoji: "🙈",
     traits: [
       "문제가 발생해도 책임을 인정하지 않고, 변명하거나 타인 탓을 하는 경향."
     ],
@@ -41,6 +44,7 @@ export const employeeStyles = [
   },
   {
     name: "감정 기복형",
+    emoji: "🎭",
     traits: [
       "기분 상태에 따라 일의 성과나 태도가 들쑥날쑥 변동."
     ],
@@ -54,6 +58,7 @@ export const employeeStyles = [
   },
   {
     name: "자율 과잉형",
+    emoji: "🦄",
     traits: [
       "규정보다 자기 방식, 지시보다 자신의 스타일을 우선시함."
     ],
@@ -67,6 +72,7 @@ export const employeeStyles = [
   },
   {
     name: "관심 요구형",
+    emoji: "🌟",
     traits: [
       "작은 성과에도 과도한 인정과 칭찬을 기대. 지속적인 관심과 피드백이 없으면 금방 동기가 떨어짐."
     ],
@@ -81,6 +87,7 @@ export const employeeStyles = [
   },
   {
     name: "은근한 반항형",
+    emoji: "🦊",
     traits: [
       "겉으로는 '네'라고 하지만 지시사항을 소극적으로 수행하거나 왜곡해 실행."
     ],
@@ -95,6 +102,7 @@ export const employeeStyles = [
   },
   {
     name: "무기력형",
+    emoji: "😴",
     traits: [
       "업무 의욕이 매우 낮고, 최소한의 노력만 기울이려 함. 소극적 태도가 지속됨."
     ],
@@ -109,6 +117,7 @@ export const employeeStyles = [
   },
   {
     name: "이기적형",
+    emoji: "🦁",
     traits: [
       "개인 이익을 조직보다 우선시. 팀 목표보다는 자신의 편의를 먼저 생각함."
     ],
@@ -123,6 +132,7 @@ export const employeeStyles = [
   },
   {
     name: "정보 독점형",
+    emoji: "🔒",
     traits: [
       "업무 정보를 자신만 소유하고 공유를 꺼림. 인수인계나 팀 협업을 어렵게 만듦."
     ],

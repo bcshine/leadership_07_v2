@@ -272,11 +272,38 @@ const LeadershipTest = {
         resultIntro.className = 'result-intro';
         resultIntro.innerHTML = `
             <p>당신의 리더십 유형 분석 결과</p>
-            <p><span class="result-type-label main-type" style="background-color: #2180de; box-shadow: 0 3px 8px rgba(33, 128, 222, 0.3);">주 유형</span> <strong>${this.typeNames[mainType]}</strong> 리더십</p>
-            <p><span class="result-type-label secondary-type">보조 유형</span> <strong>${this.typeNames[secondaryType]}</strong> 리더십</p>
+            <div class="type-buttons">
+                <button class="type-button main-type" data-type="${mainType}">주 유형 <strong>${this.typeNames[mainType]}</strong> 리더십</button>
+                <button class="type-button secondary-type" data-type="${secondaryType}">보조 유형 <strong>${this.typeNames[secondaryType]}</strong> 리더십</button>
+            </div>
         `;
         
         resultContainer.insertBefore(resultIntro, document.querySelector('.leadership-types'));
+        
+        // 버튼 클릭 시 해당 카드로 스크롤 및 강조 효과
+        setTimeout(() => {
+            const mainTypeBtn = resultIntro.querySelector('.type-button.main-type');
+            const secondaryTypeBtn = resultIntro.querySelector('.type-button.secondary-type');
+            const typeCards = document.querySelectorAll('.type');
+            const typeIndices = this.typeIndices;
+            
+            function scrollAndHighlight(type) {
+                const idx = typeIndices[type];
+                if (typeCards && typeCards[idx]) {
+                    typeCards[idx].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    typeCards[idx].classList.add('highlight-card');
+                    setTimeout(() => {
+                        typeCards[idx].classList.remove('highlight-card');
+                    }, 1500);
+                }
+            }
+            if (mainTypeBtn) {
+                mainTypeBtn.addEventListener('click', () => scrollAndHighlight(mainType));
+            }
+            if (secondaryTypeBtn) {
+                secondaryTypeBtn.addEventListener('click', () => scrollAndHighlight(secondaryType));
+            }
+        }, 100);
         
         // 페이드인 애니메이션 적용
         setTimeout(() => {

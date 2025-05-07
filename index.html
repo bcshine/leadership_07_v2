@@ -98,28 +98,31 @@
                 <p class="test-prompt">나의 리더십 유형을 알아보세요.</p>
                 <button id="leadership-test-btn" class="btn btn-large btn-test">나의 리더십 유형은?</button>
             </div>
-            <div id="leadership-test" class="hidden"></div>
+            <div id="leadership-test" class="hidden">
+                <button class="type-label main-type" data-type="장인형">주 유형</button>
+                <button class="type-label secondary-type" data-type="코치형">보조 유형</button>
+            </div>
             <div id="leadership-result" class="hidden">
                 <div class="leadership-types">
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="엄마형">
                         <h3>엄마형 리더십 <span>🤗</span></h3>
                         <p><strong>특징:</strong> 따뜻하고 지지적인 성향으로 구성원들의 감정과 복지를 중요시하는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 팀원들의 심리적 안정감을 제공하고 소속감을 강화합니다.</p>
                         <p><strong>단점:</strong> 때로는 어려운 결정이나 엄격한 방향 제시가 필요할 때 불편함을 느낄 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="장인형">
                         <h3>장인형 리더십 <span>🔍</span></h3>
                         <p><strong>특징:</strong> 정확성과 세부사항을 중시하며 높은 품질 기준을 유지하려는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 깊이 있는 분석과 전문성을 통해 탁월한 결과물을 만들어냅니다.</p>
                         <p><strong>단점:</strong> 때로는 완벽주의로 인해 의사결정이 지연되거나 팀원의 자율성이 제한될 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="코치형">
                         <h3>코치형 리더십 <span>🏆</span></h3>
                         <p><strong>특징:</strong> 구성원의 성장과 역량 개발에 초점을 맞추는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 팀원의 장기적 발전을 도모하고 자율성과 책임감을 키웁니다.</p>
                         <p><strong>단점:</strong> 모든 사람이 자기주도적 학습에 적합하지 않을 수 있으며, 즉각적인 결과가 필요한 상황에서는 비효율적일 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="지휘관형">
                         <h3>지휘관형 리더십 <span>🎯</span></h3>
                         <p><strong>특징:</strong> 명확한 방향 제시와 결과 지향적 접근법을 선호하는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 빠른 의사결정과 목표 달성에 뛰어나며 위기 상황에서 효과적입니다.</p>
@@ -293,69 +296,6 @@
         }
     </style>
 
-    <script src="buttons.js"></script>
-    <script src="employee-styles/fallback.js"></script>
     <script type="module" src="js/main.js"></script>
-    <script>
-        // 챗봇 관련 함수들
-        function toggleChatbot() {
-            const chatbox = document.getElementById('chatbox');
-            chatbox.style.display = chatbox.style.display === 'none' ? 'flex' : 'none';
-        }
-
-        async function sendMessage() {
-            const userInput = document.getElementById('user-input');
-            const message = userInput.value.trim();
-            if (!message) return;
-
-            // 사용자 메시지 표시
-            addMessage(message, 'user');
-            userInput.value = '';
-
-            // 로딩 스피너 표시
-            const spinner = document.getElementById('spinner');
-            spinner.style.display = 'block';
-
-            try {
-                const response = await fetch('/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ message }),
-                });
-
-                const data = await response.json();
-                addMessage(data.response, 'bot');
-            } catch (error) {
-                addMessage('죄송합니다. 오류가 발생했습니다.', 'bot');
-            } finally {
-                spinner.style.display = 'none';
-            }
-        }
-
-        function addMessage(text, sender) {
-            const messages = document.getElementById('messages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `msg-row msg ${sender}`;
-            messageDiv.innerHTML = `
-                <div class="bubble">${text}</div>
-            `;
-            messages.appendChild(messageDiv);
-            messages.scrollTop = messages.scrollHeight;
-        }
-
-        // 엔터 키로 메시지 전송
-        document.getElementById('user-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        import { initEmployeeStyles } from './modules/employee-styles.js';
-        document.addEventListener('DOMContentLoaded', function() {
-            initEmployeeStyles();
-        });
-    </script>
 </body>
 </html> 

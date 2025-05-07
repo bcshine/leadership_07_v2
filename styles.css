@@ -1539,4 +1539,23 @@ span.type-label {
 }
 .btn-style-choice:hover {
   background: #1976d2;
+}
+
+@media (max-width: 900px) {
+  #employee-style-buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  #employee-style-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .btn-style-choice {
+    width: 100%;
+    min-width: 0;
+    font-size: 1em;
+    height: 44px;
+    padding: 0 4px;
+  }
 } 

@@ -21,7 +21,7 @@ export function initEmployeeStyles() {
     employeeStyles.forEach((style, idx) => {
       const sBtn = document.createElement('button');
       sBtn.className = 'btn btn-style-choice';
-      sBtn.textContent = style.name;
+      sBtn.innerHTML = `<span style="font-size:1.5em; margin-right:8px;">${style.emoji}</span>${style.name}`;
       sBtn.onclick = () => showDetail(idx);
       btnsArea.appendChild(sBtn);
     });
