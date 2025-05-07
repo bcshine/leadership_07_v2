@@ -273,15 +273,17 @@
         }
 
         #employee-style-buttons {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: 16px;
             margin: 24px 0;
-            justify-items: center;
+            align-items: center;
         }
 
         .btn-style-choice {
-            width: 160px;
+            width: 320px;
+            min-width: 220px;
+            max-width: 90vw;
             height: 48px;
             font-size: 1.1em;
             border-radius: 12px;
@@ -290,6 +292,14 @@
             border: none;
             cursor: pointer;
             transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .btn-style-choice:hover {
             background: #1976d2;

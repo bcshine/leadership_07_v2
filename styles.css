@@ -1079,6 +1079,9 @@ body {
     border-radius: 6px;
     margin: 0 5px;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .main-type {
@@ -1098,6 +1101,9 @@ body {
     display: inline-block;
     font-weight: 600;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 strong.type-label {
@@ -1421,6 +1427,17 @@ span.type-label {
         font-size: 15px;
     }
 
+    .type-label, .result-type-label {
+        font-size: 0.98em;
+        padding: 4px 10px;
+        min-width: 60px;
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0.5px;
+    }
+
     #chatbot-container {
         width: 100%;
         height: 100%;
@@ -1519,15 +1536,17 @@ span.type-label {
 
 /* 직원 스타일 버튼 5개씩 2줄로 배치 */
 #employee-style-buttons {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 16px;
   margin: 24px 0;
-  justify-items: center;
+  align-items: center;
 }
 
 .btn-style-choice {
-  width: 160px;
+  width: 320px;
+  min-width: 220px;
+  max-width: 90vw;
   height: 48px;
   font-size: 1.1em;
   border-radius: 12px;
@@ -1536,6 +1555,14 @@ span.type-label {
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .btn-style-choice:hover {
   background: #1976d2;
