@@ -1515,4 +1515,28 @@ span.type-label {
         transform: scale(1.05);
         box-shadow: 0 5px 15px rgba(33, 128, 222, 0.2);
     }
+}
+
+/* 직원 스타일 버튼 5개씩 2줄로 배치 */
+#employee-style-buttons {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+  justify-items: center;
+}
+
+.btn-style-choice {
+  width: 160px;
+  height: 48px;
+  font-size: 1.1em;
+  border-radius: 12px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-style-choice:hover {
+  background: #1976d2;
 } 

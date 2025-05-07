@@ -2,253 +2,196 @@
  * 직원 스타일 기능을 처리하는 모듈
  */
 
-const EmployeeStyles = {
-    /**
-     * 직원 스타일 기능 초기화
-     */
-    init() {
-        this.elements = {
-            employeeStyleBtn: document.getElementById('employee-style-btn'),
-            employeeStyles: document.getElementById('employee-styles')
-        };
-        
-        this.setupEmployeeStyleButton();
-    },
-    
-    /**
-     * 직원 스타일 버튼 설정
-     */
-    setupEmployeeStyleButton() {
-        const { employeeStyleBtn, employeeStyles } = this.elements;
-        
-        if (employeeStyleBtn && employeeStyles) {
-            employeeStyleBtn.addEventListener('click', () => {
-                employeeStyles.classList.toggle('hidden');
-                
-                // 표시될 때 애니메이션 적용
-                if (!employeeStyles.classList.contains('hidden')) {
-                    setTimeout(() => {
-                        const styleElements = document.querySelectorAll('#employee-styles .fade-in');
-                        
-                        // 순차적 애니메이션 적용 (100ms 간격)
-                        styleElements.forEach((element, index) => {
-                            setTimeout(() => {
-                                element.classList.add('appear');
-                            }, 100 * index);
-                        });
-                    }, 100);
-                    
-                    employeeStyleBtn.textContent = '직원 스타일 닫기';
-                    
-                    // 직원 스타일 카드가 비어 있으면 데이터 로드
-                    if (employeeStyles.querySelector('.employee-style-container').children.length === 0) {
-                        this.loadEmployeeStyleData();
-                    }
-                } else {
-                    // 카드 숨기기 전에 모든 카드의 애니메이션 클래스 제거
-                    const styleElements = document.querySelectorAll('#employee-styles .fade-in');
-                    styleElements.forEach(element => {
-                        element.classList.remove('appear');
-                    });
-                    
-                    employeeStyleBtn.textContent = '직원 스타일 알아보기';
-                }
-            });
-        }
-    },
-    
-    /**
-     * 직원 스타일 데이터 로드 및 UI 생성
-     */
-    loadEmployeeStyleData() {
-        const { employeeStyles } = this.elements;
-        const container = employeeStyles.querySelector('.employee-style-container');
-        const template = document.getElementById('employee-style-template');
-        
-        // 직원 스타일 데이터
-        const employeeStylesData = [
-            {
-                type: "불만형",
-                title: "불만형 직원",
-                traits: [
-                    "항상 불만을 표현하고 부정적인 면을 강조함",
-                    "문제 해결보다 문제 지적에 집중함",
-                    "다른 팀원들의 사기를 저하시킴"
-                ],
-                solutions: [
-                    "구체적인 해결책을 함께 고민하도록 유도",
-                    "긍정적인 측면을 균형 있게 볼 수 있도록 코칭",
-                    "건설적인 피드백 방식 훈련"
-                ]
-            },
-            {
-                type: "정보독점형",
-                title: "정보독점형 직원",
-                traits: [
-                    "중요한 정보를 혼자만 알고 공유하지 않음",
-                    "자신의 업무 과정을 불투명하게 유지함",
-                    "팀 협업을 방해하는 사일로 형성"
-                ],
-                solutions: [
-                    "정보 공유의 중요성과 이점 교육",
-                    "팀 미팅에서 지식 공유 시간 마련",
-                    "투명성에 대한 보상 체계 구축"
-                ]
-            },
-            {
-                type: "무기력형",
-                title: "무기력형 직원",
-                traits: [
-                    "스스로 결정을 내리지 못하고 주저함",
-                    "업무에 대한 열정과 에너지가 부족함",
-                    "항상 지시를 기다리고 수동적으로 행동함"
-                ],
-                solutions: [
-                    "작은 성공 경험을 통한 자신감 구축",
-                    "명확한 목표와 기대치 설정",
-                    "점진적으로 의사결정 권한 부여"
-                ]
-            },
-            {
-                type: "자율과잉형",
-                title: "자율과잉형 직원",
-                traits: [
-                    "팀의 방향성과 다르게 독자적으로 행동함",
-                    "정해진 프로세스나 규칙을 무시함",
-                    "협업보다 개인 업무 방식을 고수함"
-                ],
-                solutions: [
-                    "전체 목표와 개인 업무의 연결성 강조",
-                    "규칙의 필요성과 이유 설명",
-                    "자율성을 존중하되 경계 설정"
-                ]
-            },
-            {
-                type: "지시대기형",
-                title: "지시대기형 직원",
-                traits: [
-                    "명확한 지시 없이는 행동하지 않음",
-                    "책임지는 것을 두려워함",
-                    "항상 상급자의 결정에 의존함"
-                ],
-                solutions: [
-                    "점진적으로 결정권 위임",
-                    "실수해도 괜찮은 안전한 환경 조성",
-                    "자기주도적 업무 처리 훈련"
-                ]
-            },
-            {
-                type: "무책임형",
-                title: "무책임형 직원",
-                traits: [
-                    "자신의 실수나 책임을 인정하지 않음",
-                    "항상 다른 사람이나 환경 탓을 함",
-                    "약속을 자주 어기고 기한을 지키지 않음"
-                ],
-                solutions: [
-                    "명확한 책임과 기대치 설정",
-                    "결과에 대한 책임 의식 강조",
-                    "작은 책임부터 성공적으로 완수하도록 지원"
-                ]
-            },
-            {
-                type: "관심요구형",
-                title: "관심요구형 직원",
-                traits: [
-                    "지나치게 인정과 관심을 요구함",
-                    "자신의 업적을 과시하려는 경향이 강함",
-                    "팀보다 개인적 인정에 집중함"
-                ],
-                solutions: [
-                    "정기적인 피드백과 인정 제공",
-                    "팀 성과에 대한 가치 교육",
-                    "건강한 인정 욕구로 전환 유도"
-                ]
-            },
-            {
-                type: "감정기복형",
-                title: "감정기복형 직원",
-                traits: [
-                    "감정 조절이 어렵고 기분에 따라 업무 수행이 달라짐",
-                    "스트레스 상황에서 과잉 반응함",
-                    "팀 분위기에 큰 영향을 미침"
-                ],
-                solutions: [
-                    "감정 인식과 조절 기술 교육",
-                    "스트레스 관리 방법 제안",
-                    "명확한 기대치와 일관된 환경 제공"
-                ]
-            },
-            {
-                type: "이기적형",
-                title: "이기적형 직원",
-                traits: [
-                    "자신의 이익만 추구하고 팀을 고려하지 않음",
-                    "공로는 독차지하고 책임은 회피함",
-                    "다른 팀원들과 경쟁적인 관계를 형성함"
-                ],
-                solutions: [
-                    "팀워크의 가치와 중요성 교육",
-                    "협업 성과에 대한 보상 강화",
-                    "팀 목표와 개인 목표의 연계성 강조"
-                ]
-            },
-            {
-                type: "은근한반항형",
-                title: "은근한반항형 직원",
-                traits: [
-                    "직접적으로 반대하지는 않지만 지시를 따르지 않음",
-                    "수동적 공격성을 보이며 우회적으로 저항함",
-                    "표면적으로는 동의하지만 실행하지 않음"
-                ],
-                solutions: [
-                    "솔직한 의견 교환을 장려하는 환경 조성",
-                    "저항의 원인 파악 및 해소",
-                    "명확한 기대치와 결과 추적 시스템 수립"
-                ]
-            }
-        ];
-        
-        // 카드 생성
-        employeeStylesData.forEach(style => {
-            if (template) {
-                const card = document.importNode(template.content, true);
-                const cardElement = card.querySelector('.employee-style-card');
-                
-                // 데이터 속성 설정
-                cardElement.setAttribute('data-style', style.type);
-                
-                // 제목 설정
-                const titleElement = card.querySelector('h3');
-                titleElement.textContent = style.title;
-                
-                // 특징 설정
-                const traitsList = card.querySelector('.style-traits ul');
-                style.traits.forEach(trait => {
-                    const li = document.createElement('li');
-                    li.textContent = trait;
-                    traitsList.appendChild(li);
-                });
-                
-                // 대처법 설정
-                const solutionsList = card.querySelector('.style-solutions ul');
-                style.solutions.forEach(solution => {
-                    const li = document.createElement('li');
-                    li.textContent = solution;
-                    solutionsList.appendChild(li);
-                });
-                
-                // 자세히 보기 버튼 이벤트
-                const viewDetailsBtn = card.querySelector('.view-details-btn');
-                viewDetailsBtn.addEventListener('click', () => {
-                    window.location.href = `employee-styles/${style.type}.html`;
-                });
-                
-                // 카드 추가
-                container.appendChild(card);
-            }
-        });
-    }
-};
+export const employeeStyles = [
+  {
+    name: "지시 대기형",
+    traits: [
+      "자발적 행동 없이 주어진 업무만 처리. 스스로 다음 일을 찾지 않고 항상 지시를 기다림. 주체성 부족."
+    ],
+    strengths: "정해진 매뉴얼이나 절차를 잘 따르며, 규칙적인 반복 업무에 적합.",
+    weaknesses: "예상치 못한 상황이나 문제 발생 시 대처 능력 부족. 업무 속도와 팀 에너지 저하 유발 가능.",
+    improvement: "일 처리 기준과 선택지를 사전에 제공하여 '스스로 판단'하는 경험을 늘려야 함.",
+    whatToSay: "이제는 스스로 다음 행동을 선택해보세요. 어떤 상황에서 어떤 선택을 할지 체크리스트를 참고해 판단해봅시다.",
+    solutions: [
+      "업무 프로세스를 문서화해두고, 작은 상황이라도 스스로 결정하는 연습을 시킴.",
+      "'스스로 행동하기'를 성과지표(KPI)로 설정하여 꾸준히 피드백."
+    ]
+  },
+  {
+    name: "불만형",
+    traits: [
+      "근무환경, 동료, 회사 정책 등 다양한 대상에 대해 지속적인 불평을 함. 문제 중심 사고가 강함."
+    ],
+    strengths: "숨은 문제나 불합리한 점을 빠르게 인지할 수 있는 감각이 있음.",
+    weaknesses: "긍정 에너지를 소모시키고, 주변 동료들에게까지 부정적 영향을 끼칠 수 있음.",
+    improvement: "불만을 단순 표현이 아닌 '구체적 개선 제안'으로 바꿔야 함.",
+    whatToSay: "불편한 점을 이야기할 때는, 함께 해결책까지 생각해보는 걸 원칙으로 합시다. 그냥 불만만 이야기하는 건 도움이 되지 않습니다.",
+    solutions: [
+      "불만은 개인 면담으로만 수집. 팀 전체에는 긍정 강화 활동(예: 성과 공유 모임)을 통해 분위기를 관리."
+    ]
+  },
+  {
+    name: "무책임형",
+    traits: [
+      "문제가 발생해도 책임을 인정하지 않고, 변명하거나 타인 탓을 하는 경향."
+    ],
+    strengths: "일부 상황에서는 자신을 방어하려는 생존력이 있음.",
+    weaknesses: "팀워크 저하, 업무 오류 반복, 신뢰성 상실.",
+    improvement: "실패를 숨기지 말고 공유하도록, '실패도 성과'라는 인식을 심어야 함.",
+    whatToSay: "문제가 생긴 건 괜찮습니다. 중요한 건 원인과 개선 방안을 명확히 찾고, 다음엔 어떻게 할지를 정하는 겁니다.",
+    solutions: [
+      "'문제-원인-개선책'을 적게 하고, 책임 소재를 명확히 구분. 개선 시도 자체를 평가하는 문화를 조성."
+    ]
+  },
+  {
+    name: "감정 기복형",
+    traits: [
+      "기분 상태에 따라 일의 성과나 태도가 들쑥날쑥 변동."
+    ],
+    strengths: "감정이 좋을 때는 에너지가 넘치고, 창의적 결과를 내기도 함.",
+    weaknesses: "업무 품질 유지가 불안정해 팀 전체 리듬을 깨뜨릴 수 있음.",
+    improvement: "감정 표현은 허용하되, 업무 기준은 항상 일정하게 유지하도록 함.",
+    whatToSay: "감정은 자연스러운 거예요. 다만 일의 기준은 변함없이 지켜야 합니다. 힘들 때는 같이 조율할 방법을 찾아봅시다.",
+    solutions: [
+      "업무 체크리스트를 통해 '감정과 무관한 기본 업무'를 관리하고, 스트레스 관리 교육도 병행."
+    ]
+  },
+  {
+    name: "자율 과잉형",
+    traits: [
+      "규정보다 자기 방식, 지시보다 자신의 스타일을 우선시함."
+    ],
+    strengths: "창의적 아이디어와 유연한 문제 해결력을 지님.",
+    weaknesses: "조직 규율을 무너뜨리고, 통제 불가 상황을 만들 수 있음.",
+    improvement: "초기에 규칙과 재량 범위를 명확히 정하고, 결과 책임을 강화.",
+    whatToSay: "당신의 자율성을 존중합니다. 다만, 자유에는 책임이 따릅니다. 정해진 규칙 안에서 창의적으로 움직여주세요.",
+    solutions: [
+      "성과와 책임을 연결. 자유 권한은 단계별로 부여하며, 규정 준수 여부를 지속 체크."
+    ]
+  },
+  {
+    name: "관심 요구형",
+    traits: [
+      "작은 성과에도 과도한 인정과 칭찬을 기대. 지속적인 관심과 피드백이 없으면 금방 동기가 떨어짐."
+    ],
+    strengths: "작은 일에도 성취감을 느끼고, 외부 인정에 민감해 빠른 반응을 보일 수 있음.",
+    weaknesses: "지나치게 칭찬을 요구하면 사장의 에너지를 소모시키고, 공정성 이슈를 유발할 수 있음.",
+    improvement: "성과 기준을 명확히 정하고, 공식적 자리에서 균형 잡힌 칭찬 제공.",
+    whatToSay: "성과가 나올 때마다 인정을 할 겁니다. 다만 모든 성과가 똑같이 큰 의미를 갖는 것은 아니에요. 기준에 따라 공정하게 칭찬하겠습니다.",
+    solutions: [
+      "과도한 관심 요구를 '자율 목표 관리'로 전환.",
+      "성과 중심 보상 체계를 강화하고, 인정이 필요한 부분과 아닌 부분을 명확히 구분하여 관리."
+    ]
+  },
+  {
+    name: "은근한 반항형",
+    traits: [
+      "겉으로는 '네'라고 하지만 지시사항을 소극적으로 수행하거나 왜곡해 실행."
+    ],
+    strengths: "조직에 필요한 비판적 사고를 지니고 있을 가능성 있음.",
+    weaknesses: "명령 불이행, 업무 지연, 리더십 약화 초래.",
+    improvement: "업무 지시를 명확하고 구체적으로 전달하고, 결과를 수치적으로 관리.",
+    whatToSay: "당신의 생각을 듣는 것도 중요하지만, 일단 합의된 업무는 정확하게 빠르게 진행해야 합니다. 나중에 개선 의견은 별도로 받을게요.",
+    solutions: [
+      "업무 지시를 문서화하고, 체크리스트와 수치 기준으로 진행 상황 관리.",
+      "반복적 반항 시에는 공식 경고를 주고, 최악의 경우 교체를 고려."
+    ]
+  },
+  {
+    name: "무기력형",
+    traits: [
+      "업무 의욕이 매우 낮고, 최소한의 노력만 기울이려 함. 소극적 태도가 지속됨."
+    ],
+    strengths: "관심 있는 분야에서는 몰입력이 생길 가능성.",
+    weaknesses: "업무 품질 저하, 팀 사기 저하, 다른 직원들에게도 부정적 영향을 미침.",
+    improvement: "작은 성공을 반복 경험시켜 자존감을 회복시키고, 관심 분야를 조금씩 부여.",
+    whatToSay: "당신이 잘할 수 있는 부분을 찾고 싶습니다. 작은 것부터 성공을 쌓아가면서, 함께 변화를 만들어봅시다.",
+    solutions: [
+      "개인 관심사를 파악해 맞춤형 업무 부여.",
+      "성장 곡선이 보이지 않으면 인사 전환 또는 퇴직 유도까지 고려."
+    ]
+  },
+  {
+    name: "이기적형",
+    traits: [
+      "개인 이익을 조직보다 우선시. 팀 목표보다는 자신의 편의를 먼저 생각함."
+    ],
+    strengths: "자기 목표 달성에 대한 집중력과 추진력이 강함.",
+    weaknesses: "팀워크 저하, 갈등 유발, 집단 성과 손실.",
+    improvement: "개인 성과가 아닌 팀 성과에 대한 보상 체계를 강화해야 함.",
+    whatToSay: "팀의 성공이 곧 개인의 성공입니다. 혼자 성과를 내는 게 아니라, 팀 전체가 잘 돼야 당신의 성과도 인정받을 수 있어요.",
+    solutions: [
+      "협력과 소통 항목을 성과 평가에 포함.",
+      "이기적 행동이 반복되면 빠른 시간 안에 재배치나 정리 조치."
+    ]
+  },
+  {
+    name: "정보 독점형",
+    traits: [
+      "업무 정보를 자신만 소유하고 공유를 꺼림. 인수인계나 팀 협업을 어렵게 만듦."
+    ],
+    strengths: "업무에 대한 깊은 이해도와 책임감을 가지고 있을 가능성.",
+    weaknesses: "업무 연속성 중단, 조직 리스크 증가, 신규 인력 적응 방해.",
+    improvement: "모든 정보를 공유 문서화하고, 인수인계 의무를 강화해야 함.",
+    whatToSay: "업무 정보는 개인 것이 아니라 회사의 자산입니다. 우리가 함께 일하려면 정보를 투명하게 공유해야 합니다.",
+    solutions: [
+      "공유 문서 작성 의무화.",
+      "정보 독점은 평가 항목에 명시하여 성과에 직접 반영하고, 반복 시 강력 조치."
+    ]
+  }
+];
 
-export default EmployeeStyles; 
+export function initEmployeeStyles() {
+  const btn = document.getElementById('employee-style-btn');
+  const btnsArea = document.getElementById('employee-style-buttons');
+  const detailArea = document.getElementById('employee-style-detail');
+
+  // 1. 처음엔 버튼만 보임
+  btn.classList.remove('hidden');
+  btnsArea.classList.add('hidden');
+  detailArea.classList.add('hidden');
+
+  // 2. "직원 스타일 알아보기" 클릭 시 10개 버튼 표시
+  btn.onclick = () => {
+    btn.classList.add('hidden');
+    btnsArea.innerHTML = '';
+    employeeStyles.forEach((style, idx) => {
+      const sBtn = document.createElement('button');
+      sBtn.className = 'btn btn-style-choice';
+      sBtn.textContent = style.name;
+      sBtn.onclick = () => showDetail(idx);
+      btnsArea.appendChild(sBtn);
+    });
+    btnsArea.classList.remove('hidden');
+    detailArea.classList.add('hidden');
+  };
+
+  // 3. 상세보기 렌더 함수
+  function showDetail(idx) {
+    const style = employeeStyles[idx];
+    btnsArea.classList.add('hidden');
+    detailArea.innerHTML = `
+      <div class="employee-style-detail-box">
+        <h3>${style.name}</h3>
+        <h4>특징</h4>
+        <ul>${style.traits.map(t => `<li>${t}</li>`).join('')}</ul>
+        <h4>강점</h4>
+        <p>${style.strengths}</p>
+        <h4>단점</h4>
+        <p>${style.weaknesses}</p>
+        <h4>개선점</h4>
+        <p>${style.improvement}</p>
+        <h4>무슨 말을 해야 하나</h4>
+        <p>${style.whatToSay}</p>
+        <h4>대처법</h4>
+        <ul>${style.solutions.map(s => `<li>${s}</li>`).join('')}</ul>
+        <button class="btn btn-back">이전으로 돌아가기</button>
+      </div>
+    `;
+    detailArea.classList.remove('hidden');
+    detailArea.querySelector('.btn-back').onclick = () => {
+      detailArea.classList.add('hidden');
+      btnsArea.classList.remove('hidden');
+    };
+  }
+} 
