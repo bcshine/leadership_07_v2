@@ -1548,14 +1548,41 @@ span.type-label {
 }
 @media (max-width: 600px) {
   #employee-style-buttons {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
     gap: 10px;
+    align-items: stretch;
   }
   .btn-style-choice {
     width: 100%;
     min-width: 0;
-    font-size: 1em;
+    font-size: 1.1em;
     height: 44px;
     padding: 0 4px;
+    margin: 0;
+    border-radius: 10px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+  .type-buttons {
+    flex-direction: column;
+    gap: 12px;
+    align-items: stretch;
+  }
+  .type-button {
+    font-size: 1em;
+    padding: 14px 10px;
+    border-radius: 10px;
+    width: 100%;
+    min-width: 0;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .type-button span {
+    font-size: 1.2em;
+    margin-bottom: 4px;
+  }
+  .type-button strong, .type-button div {
+    font-size: 1.1em;
   }
 } 
