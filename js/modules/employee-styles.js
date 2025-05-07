@@ -27,11 +27,15 @@ export function initEmployeeStyles() {
     });
     btnsArea.classList.remove('hidden');
     detailArea.classList.add('hidden');
+    setTimeout(() => {
+      btnsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   // 3. 상세보기 렌더 함수
   function showDetail(idx) {
     const style = employeeStyles[idx];
+    // 버튼 전체 숨기고 상세만 보이게
     btnsArea.classList.add('hidden');
     detailArea.innerHTML = `
       <div class="employee-style-detail-box">
@@ -52,14 +56,17 @@ export function initEmployeeStyles() {
       </div>
     `;
     detailArea.classList.remove('hidden');
-    // 스크롤 및 포커스
     setTimeout(() => {
       detailArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
       detailArea.focus && detailArea.focus();
     }, 50);
     detailArea.querySelector('.btn-back').onclick = () => {
+      // 상세 숨기고 버튼 전체 다시 보이게
       detailArea.classList.add('hidden');
       btnsArea.classList.remove('hidden');
+      setTimeout(() => {
+        btnsArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
     };
   }
 } 
