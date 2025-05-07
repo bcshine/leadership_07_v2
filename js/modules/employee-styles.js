@@ -52,6 +52,11 @@ export function initEmployeeStyles() {
       </div>
     `;
     detailArea.classList.remove('hidden');
+    // 스크롤 및 포커스
+    setTimeout(() => {
+      detailArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      detailArea.focus && detailArea.focus();
+    }, 50);
     detailArea.querySelector('.btn-back').onclick = () => {
       detailArea.classList.add('hidden');
       btnsArea.classList.remove('hidden');
