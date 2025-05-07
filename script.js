@@ -627,7 +627,22 @@ function loadEmployeeStyleData() {
             // 자세히 보기 버튼 이벤트
             const viewDetailsBtn = card.querySelector('.view-details-btn');
             viewDetailsBtn.addEventListener('click', () => {
-                window.location.href = `employee-styles/${style.type}.html`;
+                const detailedInfo = cardElement.querySelector('.detailed-info');
+                if (detailedInfo) {
+                    detailedInfo.classList.remove('hidden');
+                    
+                    // 상세 정보가 비어 있으면 동적으로 내용 추가
+                    if (detailedInfo.querySelector('p') === null) {
+                        // 상세 분석 내용 추가
+                        const analysis = document.createElement('p');
+                        analysis.innerHTML = `<strong>특성:</strong> ${style.traits.join('<br>')}`;
+                        detailedInfo.insertBefore(analysis, detailedInfo.querySelector('.close-details-btn'));
+                        
+                        const solutions = document.createElement('p');
+                        solutions.innerHTML = `<strong>대처법:</strong> ${style.solutions.join('<br>')}`;
+                        detailedInfo.insertBefore(solutions, detailedInfo.querySelector('.close-details-btn'));
+                    }
+                }
             });
             
             // 카드 추가
@@ -659,7 +674,28 @@ function loadEmployeeStyleData() {
 function showDetails() {
     const card = this.closest('.employee-style-card');
     const styleType = card.getAttribute('data-style');
-    window.location.href = `employee-styles/${styleType}.html`;
+    
+    // 서버 오류 방지: URL 이동 대신 카드 내부에 상세 정보 표시
+    const detailedInfo = card.querySelector('.detailed-info');
+    if (detailedInfo) {
+        detailedInfo.classList.remove('hidden');
+        
+        // 상세 정보가 비어 있으면 동적으로 내용 추가
+        if (detailedInfo.querySelector('p') === null) {
+            // 스타일 타입에 맞는 자세한 정보를 동적으로 생성
+            const stylesData = employeeStylesData.find(style => style.type === styleType);
+            if (stylesData) {
+                // 상세 분석 내용 추가
+                const analysis = document.createElement('p');
+                analysis.innerHTML = `<strong>특성:</strong> ${stylesData.traits.join('<br>')}`;
+                detailedInfo.insertBefore(analysis, detailedInfo.querySelector('.close-details-btn'));
+                
+                const solutions = document.createElement('p');
+                solutions.innerHTML = `<strong>대처법:</strong> ${stylesData.solutions.join('<br>')}`;
+                detailedInfo.insertBefore(solutions, detailedInfo.querySelector('.close-details-btn'));
+            }
+        }
+    }
 }
 
 // 상세정보 숨기기 함수
