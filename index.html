@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>중간계 리더십 실전코스 (25년)</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts - Noto Sans KR -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 1번째 영역: 네비게이션바 -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo/logo_only3.png" alt="중간계캠퍼스 로고">
+            </div>
+            <div class="title">
+                <h1>중간계 리더십 실전코스 (25년)</h1>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#main-banner">홈</a></li>
+                <li><a href="#leadership-type">리더십 유형</a></li>
+                <li><a href="#employee-style">직원 스타일</a></li>
+                <li><a href="#contact">연락처</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 2번째 영역: 메인 배너 -->
+    <section id="main-banner" class="section">
+        <div class="banner-bg"></div>
+        <div class="container">
+            <div class="banner-content">
+                <div class="main-logo">
+                    <img src="images/logo/logo_only3.png" alt="중간계캠퍼스 로고" class="banner-logo">
+                </div>
+                <h2 class="main-title">올바른 리더가 회사를 움직인다</h2>
+                <p class="main-description">중간계 리더십 실전코스에서 당신의 리더십을 발견하세요</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3번째 영역: 리더십 유형 -->
+    <section id="leadership-type" class="section card-section">
+        <div class="container">
+            <h2>리더십 유형</h2>
+            
+            <div class="schedule-container">
+                <h3 class="schedule-main-title">리더십 실전 코스 스케줄</h3>
+                <div class="table-responsive">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th>회차</th>
+                                <th>일정</th>
+                                <th>내용</th>
+                                <th>비고</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1회차</td>
+                                <td>5월 7일 (수)</td>
+                                <td>사장님 리더십 유형 분류<br>나는 어떤 리더인가?</td>
+                                <td>리더십 유형<br>점검 체크리스트</td>
+                            </tr>
+                            <tr>
+                                <td>2회차</td>
+                                <td>5월 21일 (수)</td>
+                                <td>직원과의 갈등<br>원인과 대응책</td>
+                                <td>감정 갈등 vs. 역할 갈등<br>공감 대화법</td>
+                            </tr>
+                            <tr>
+                                <td>3회차</td>
+                                <td>6월 4일 (수)</td>
+                                <td>신뢰와 존중의 피드백</td>
+                                <td>직원 동기와 욕구 이해<br>구조화된 피드백</td>
+                            </tr>
+                            <tr>
+                                <td>4회차</td>
+                                <td>6월 18일 (수)</td>
+                                <td>나만의 리더십 매뉴얼 만들기</td>
+                                <td>나의 행동 원칙 정리<br>팀운영 개선계획</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+
+            
+            <div class="test-button-container">
+                <p class="test-prompt">나의 리더십 유형을 알아보세요.</p>
+                <button id="leadership-test-btn" class="btn btn-large btn-test">나의 리더십 유형은?</button>
+            </div>
+            <div id="leadership-test" class="hidden"></div>
+            <div id="leadership-result" class="hidden">
+                <div class="leadership-types">
+                    <div class="type fade-in">
+                        <h3>엄마형 리더십 <span>🤗</span></h3>
+                        <p><strong>특징:</strong> 따뜻하고 지지적인 성향으로 구성원들의 감정과 복지를 중요시하는 리더십 유형입니다.</p>
+                        <p><strong>강점:</strong> 팀원들의 심리적 안정감을 제공하고 소속감을 강화합니다.</p>
+                        <p><strong>단점:</strong> 때로는 어려운 결정이나 엄격한 방향 제시가 필요할 때 불편함을 느낄 수 있습니다.</p>
+                    </div>
+                    <div class="type fade-in">
+                        <h3>장인형 리더십 <span>🔍</span></h3>
+                        <p><strong>특징:</strong> 정확성과 세부사항을 중시하며 높은 품질 기준을 유지하려는 리더십 유형입니다.</p>
+                        <p><strong>강점:</strong> 깊이 있는 분석과 전문성을 통해 탁월한 결과물을 만들어냅니다.</p>
+                        <p><strong>단점:</strong> 때로는 완벽주의로 인해 의사결정이 지연되거나 팀원의 자율성이 제한될 수 있습니다.</p>
+                    </div>
+                    <div class="type fade-in">
+                        <h3>코치형 리더십 <span>🏆</span></h3>
+                        <p><strong>특징:</strong> 구성원의 성장과 역량 개발에 초점을 맞추는 리더십 유형입니다.</p>
+                        <p><strong>강점:</strong> 팀원의 장기적 발전을 도모하고 자율성과 책임감을 키웁니다.</p>
+                        <p><strong>단점:</strong> 모든 사람이 자기주도적 학습에 적합하지 않을 수 있으며, 즉각적인 결과가 필요한 상황에서는 비효율적일 수 있습니다.</p>
+                    </div>
+                    <div class="type fade-in">
+                        <h3>지휘관형 리더십 <span>🎯</span></h3>
+                        <p><strong>특징:</strong> 명확한 방향 제시와 결과 지향적 접근법을 선호하는 리더십 유형입니다.</p>
+                        <p><strong>강점:</strong> 빠른 의사결정과 목표 달성에 뛰어나며 위기 상황에서 효과적입니다.</p>
+                        <p><strong>단점:</strong> 때로는 구성원들의 감정이나 개인적 상황을 고려하지 못할 수 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4번째 영역: 직원 스타일 -->
+    <section id="employee-style" class="section card-section">
+        <div class="container">
+            <h2>직원 스타일</h2>
+            <div class="test-button-container">
+                <p class="test-prompt">직원들의 스타일을 알아보세요.</p>
+                <button id="employee-style-btn" class="btn btn-large btn-test">직원 스타일 알아보기</button>
+            </div>
+            <div id="employee-styles" class="hidden">
+                <!-- 여기에 직원 스타일 카드가 동적으로 추가됩니다 -->
+                <!-- 직원 스타일 카드 템플릿 -->
+                <template id="employee-style-template">
+                    <div class="employee-style-card fade-in">
+                        <h3></h3>
+                        <div class="style-details">
+                            <div class="style-traits">
+                                <h4>특징</h4>
+                                <ul></ul>
+                            </div>
+                            <div class="style-solutions">
+                                <h4>대처법</h4>
+                                <ul></ul>
+                            </div>
+                            <button class="view-details-btn">자세히 보기</button>
+                        </div>
+                        <div class="detailed-info hidden">
+                            <h4>상세 분석</h4>
+                            <!-- 상세 정보는 동적으로 추가됨 -->
+                            <button class="close-details-btn">접기</button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7번째 영역: 연락처 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>연락처</h2>
+            <div class="contact-info">
+                <div class="info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>매장주소: 서울시 서초구 논현로 173</p>
+                </div>
+                <div class="info">
+                    <i class="fas fa-phone"></i>
+                    <p>전화번호: 02-6952-9454, 9455</p>
+                </div>
+                <div class="info">
+                    <i class="fas fa-fax"></i>
+                    <p>팩스: 02-6952-9553</p>
+                </div>
+                <div class="info">
+                    <i class="fas fa-envelope"></i>
+                    <p>이메일: midcam31@gmail.com</p>
+                </div>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-blogger"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <script src="buttons.js"></script>
+    <script src="employee-styles/fallback.js"></script>
+</body>
+</html> 

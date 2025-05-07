@@ -1,0 +1,14 @@
+{
+  "name": "leadership-coach",
+  "version": "1.0.0",
+  "description": "중간계 리더십 실전코스 웹 애플리케이션",
+  "scripts": {
+    "start": "serve ."
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
