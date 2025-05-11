@@ -98,28 +98,31 @@
                 <p class="test-prompt">나의 리더십 유형을 알아보세요.</p>
                 <button id="leadership-test-btn" class="btn btn-large btn-test">나의 리더십 유형은?</button>
             </div>
-            <div id="leadership-test" class="hidden"></div>
+            <div id="leadership-test" class="hidden">
+                <button class="type-label main-type" data-type="장인형">주 유형</button>
+                <button class="type-label secondary-type" data-type="코치형">보조 유형</button>
+            </div>
             <div id="leadership-result" class="hidden">
                 <div class="leadership-types">
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="엄마형">
                         <h3>엄마형 리더십 <span>🤗</span></h3>
                         <p><strong>특징:</strong> 따뜻하고 지지적인 성향으로 구성원들의 감정과 복지를 중요시하는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 팀원들의 심리적 안정감을 제공하고 소속감을 강화합니다.</p>
                         <p><strong>단점:</strong> 때로는 어려운 결정이나 엄격한 방향 제시가 필요할 때 불편함을 느낄 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="장인형">
                         <h3>장인형 리더십 <span>🔍</span></h3>
                         <p><strong>특징:</strong> 정확성과 세부사항을 중시하며 높은 품질 기준을 유지하려는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 깊이 있는 분석과 전문성을 통해 탁월한 결과물을 만들어냅니다.</p>
                         <p><strong>단점:</strong> 때로는 완벽주의로 인해 의사결정이 지연되거나 팀원의 자율성이 제한될 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="코치형">
                         <h3>코치형 리더십 <span>🏆</span></h3>
                         <p><strong>특징:</strong> 구성원의 성장과 역량 개발에 초점을 맞추는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 팀원의 장기적 발전을 도모하고 자율성과 책임감을 키웁니다.</p>
                         <p><strong>단점:</strong> 모든 사람이 자기주도적 학습에 적합하지 않을 수 있으며, 즉각적인 결과가 필요한 상황에서는 비효율적일 수 있습니다.</p>
                     </div>
-                    <div class="type fade-in">
+                    <div class="type fade-in" id="지휘관형">
                         <h3>지휘관형 리더십 <span>🎯</span></h3>
                         <p><strong>특징:</strong> 명확한 방향 제시와 결과 지향적 접근법을 선호하는 리더십 유형입니다.</p>
                         <p><strong>강점:</strong> 빠른 의사결정과 목표 달성에 뛰어나며 위기 상황에서 효과적입니다.</p>
@@ -138,31 +141,10 @@
                 <p class="test-prompt">직원들의 스타일을 알아보세요.</p>
                 <button id="employee-style-btn" class="btn btn-large btn-test">직원 스타일 알아보기</button>
             </div>
-            <div id="employee-styles" class="hidden">
-                <!-- 여기에 직원 스타일 카드가 동적으로 추가됩니다 -->
-                <!-- 직원 스타일 카드 템플릿 -->
-                <template id="employee-style-template">
-                    <div class="employee-style-card fade-in">
-                        <h3></h3>
-                        <div class="style-details">
-                            <div class="style-traits">
-                                <h4>특징</h4>
-                                <ul></ul>
-                            </div>
-                            <div class="style-solutions">
-                                <h4>대처법</h4>
-                                <ul></ul>
-                            </div>
-                            <button class="view-details-btn">자세히 보기</button>
-                        </div>
-                        <div class="detailed-info hidden">
-                            <h4>상세 분석</h4>
-                            <!-- 상세 정보는 동적으로 추가됨 -->
-                            <button class="close-details-btn">접기</button>
-                        </div>
-                    </div>
-                </template>
-            </div>
+            <!-- 10개 버튼 영역 -->
+            <div id="employee-style-buttons" class="hidden"></div>
+            <!-- 상세보기 영역 -->
+            <div id="employee-style-detail" class="hidden"></div>
         </div>
     </section>
 
@@ -196,7 +178,134 @@
         </div>
     </section>
 
-    <script src="buttons.js"></script>
-    <script src="employee-styles/fallback.js"></script>
+    <div class="container">
+        <div class="leadership-test-container">
+            <!-- 챗봇 UI 추가 -->
+            <div id="chatbox" style="display: none;">
+                <div class="header-bar">
+                    <div class="header-top">
+                        <span class="header-arrow" onclick="toggleChatbot()">&#8592;</span>
+                        <div class="header-avatar">
+                            <img src="leadership_Chatbot/static/image/smile01.png" alt="챗봇 아바타">
+                        </div>
+                        <span class="header-title">리더십 챗봇</span>
+                        <span class="header-dot"></span>
+                    </div>
+                </div>
+                <div id="messages">
+                    <div id="leadership-lesson-btn-container">
+                        <button id="leadership-lesson-btn">오늘의 리더십 교훈</button>
+                    </div>
+                </div>
+                <div id="spinner" style="display:none;"></div>
+                <div id="input-row">
+                    <input id="user-input" type="text" placeholder="메시지를 입력하세요..." autofocus>
+                    <button id="send-btn" onclick="sendMessage()">전송</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* 챗봇 스타일 */
+        #chatbox {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: none;
+            flex-direction: column;
+            z-index: 1000;
+        }
+        
+        .chatbot-toggle-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #1976d2;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .header-bar {
+            background: #1976d2;
+            border-radius: 16px 16px 0 0;
+            padding: 10px;
+            color: white;
+        }
+        
+        #messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        
+        #input-row {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        #user-input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+        
+        #send-btn {
+            padding: 8px 16px;
+            background: #1976d2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #employee-style-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 24px 0;
+            align-items: center;
+        }
+
+        .btn-style-choice {
+            width: 320px;
+            min-width: 220px;
+            max-width: 90vw;
+            height: 48px;
+            font-size: 1.1em;
+            border-radius: 12px;
+            background: #2196f3;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .btn-style-choice:hover {
+            background: #1976d2;
+        }
+    </style>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html> 

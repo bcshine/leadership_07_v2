@@ -4,7 +4,7 @@
 import UI from './modules/ui.js';
 import Effects from './modules/effects.js';
 import LeadershipTest from './modules/leadership-test.js';
-import EmployeeStyles from './modules/employee-styles.js';
+import { initEmployeeStyles } from './modules/employee-styles.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     console.log('Document loaded, initializing application...');
@@ -19,5 +19,5 @@ document.addEventListener('DOMContentLoaded', function() {
     LeadershipTest.init();
     
     // Initialize employee styles module
-    EmployeeStyles.init();
+    initEmployeeStyles();
 }); 
